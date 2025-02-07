@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-     RootFinding solver;
+     RootFinding rfind;
 
     double a, b, tole;
     int max_iter;
@@ -21,10 +21,10 @@ int main()
     cin >> max_iter;
 
     
-    double rootbisection = solver.bisection(a, b, max_iter, tole);
+    double rootbisection = rfind.bisection(a, b, max_iter, tole);
 
     
-        cout << "\nApproximate root: " << rootbisection << "\n";
+        cout << "\n Root using Bisection: " << rootbisection << "\n";
    
 
    
@@ -38,7 +38,7 @@ int main()
     cout << "Enter max iterations: ";
     cin >> iter;
     double root = rf.newtonRaphson(x0, tol, iter);
-    cout << "\nEstimated Root: " << root << "\n";
+    cout << "\n Estimated Root: " << root << "\n";
 
     double x1, tolerance;
     int iterations;

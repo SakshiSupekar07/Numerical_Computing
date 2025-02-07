@@ -19,14 +19,14 @@ double RootFinding::bisection(double a, double b, int max_iter, double tole)
     }
     double mid;
 
-   cout << "| " << setw(10) << "Iteration"
-              << " | " << setw(10) << "a"
-              << " | " << setw(10) << "f(a)"
-              << " | " << setw(10) << "b"
-              << " | " << setw(10) << "f(b)"
-              << " | " << setw(10) << "mid"
-              << " | " << setw(10) << "f(mid)"
-              << " |\n";
+    cout << "| " << setw(10) << "Iteration"
+         << " | " << setw(10) << "a"
+         << " | " << setw(10) << "f(a)"
+         << " | " << setw(10) << "b"
+         << " | " << setw(10) << "f(b)"
+         << " | " << setw(10) << "mid"
+         << " | " << setw(10) << "f(mid)"
+         << " |\n";
     cout << "------------------------------------------------------------------------------------------------\n";
 
     for (int i = 0; i < max_iter; i++)
@@ -36,14 +36,14 @@ double RootFinding::bisection(double a, double b, int max_iter, double tole)
         mid = (a + b) / 2;
         double f_mid = func(mid);
 
-        cout << "| " << setw(10) << i
-                  << " | " << setw(10) << fixed << setprecision(3) << a
-                  << " | " << setw(10) << fa
-                  << " | " << setw(10) << b
-                  << " | " << setw(10) << fb
-                  << " | " << setw(10) << mid
-                  << " | " << setw(10) << f_mid
-                  << " |\n";
+        cout << "| "  << i
+             << " | " << setw(10) << fixed << setprecision(3) << a
+             << " | " << setw(10) << fa
+             << " | " << setw(10) << b
+             << " | " << setw(10) << fb
+             << " | " << setw(10) << mid
+             << " | " << setw(10) << f_mid
+             << " |\n";
 
         if (abs(f_mid) < tole)
         {
