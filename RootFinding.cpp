@@ -19,13 +19,13 @@ double RootFinding::bisection(double a, double b, int max_iter, double tole)
     }
     double mid;
 
-    cout << "| " << setw(10) << "Iteration"
-         << " | " << setw(10) << "a"
-         << " | " << setw(10) << "f(a)"
-         << " | " << setw(10) << "b"
-         << " | " << setw(10) << "f(b)"
-         << " | " << setw(10) << "mid"
-         << " | " << setw(10) << "f(mid)"
+    cout << "| " << setw(10) <<  "Iteration"
+         << " | " << setw(10) <<  "a"
+         << " | " << setw(10) <<  "f(a)"
+         << " | " << setw(10) <<  "b"
+         << " | " << setw(10) <<  "f(b)"
+         << " | " << setw(10) <<  "mid"
+         << " | " << setw(10) <<  "f(mid)"
          << " |\n";
     cout << "------------------------------------------------------------------------------------------------\n";
 
