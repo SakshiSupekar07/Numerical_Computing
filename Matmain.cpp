@@ -1,25 +1,34 @@
 
 #include "Matrix.hpp"
+#include<string>
 using namespace std;
 
 int main()
 {
     int rows, cols;
+    string filename;
+    string filename1;
+ 
+    cout<<"Enter filename to read matrix from:\n";  
+    cin>>filename;
+    cout<<"Enter filename to read matrix from:\n";  
+    cin>>filename1;
+    
+   
+    
 
-    cout << "Enter number of rows and columns: ";
-    cin >> rows >> cols;
 
-    Matrix mat1(rows, cols);
-    Matrix mat2(rows, cols);
-
-    cout << "Enter elements for first matrix:\n";
-    mat1.input();
+    Matrix mat1(0,0),mat2(0,0);
+   
+    mat1.input(filename);
+    mat2.input(filename1);
+    cout<<"Matrix 1:\n";
     mat1.display();
-
-    cout << "Enter elements for second matrix:\n";
-    mat2.input();
+    cout<<"Matrix 2:\n";
     mat2.display();
 
+
+    
     Matrix sum = mat1.add(mat2);
     cout << "Sum of matrices:\n";
     sum.display();

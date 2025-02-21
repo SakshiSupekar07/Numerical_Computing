@@ -1,4 +1,5 @@
 #include "Matrix.hpp"
+#include<fstream>
 using namespace std;
 
 Matrix::Matrix(int r, int c) {
@@ -18,14 +19,29 @@ Matrix::~Matrix() {
 }
 
 
-    void Matrix::input() {
-        cout << "Enter elements for " << rows << "x" << cols << " matrix:\n";
+    void Matrix::input( const std::string&filename) {
+        ifstream file(filename);
+        if (!file.is_open()) {
+            cout << "File not found\n";
+            return;
+        }
+        file>>rows>>cols;
+        data = new int*[rows];
         for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                cin >> data[i][j];
+            data[i] = new int[cols];
+        }
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                file>>data[i][j];
             }
         }
+        file.close();
+
+      
     }
+    
+
+   
     
     void Matrix::display() {
         cout << "Matrix:\n";
@@ -60,8 +76,7 @@ Matrix::~Matrix() {
     }
 
     bool Matrix::isIdentity() {
-        if (rows != cols) return false; // Identity matrix must be square
-        
+        if (rows != cols) return false; 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if ((i == j && data[i][j] != 1) || (i != j && data[i][j] != 0)) {

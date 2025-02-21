@@ -6,7 +6,7 @@ class Matrix{
     public:
     Matrix(int r,int c);
     ~Matrix();      
-    void input();
+    void input(const std::string&filename);
     void display();
     Matrix add(Matrix &mat);
     Matrix sub(Matrix &mat);
