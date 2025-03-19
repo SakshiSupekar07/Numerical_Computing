@@ -1,52 +1,41 @@
-
 #include "Matrix.hpp"
-#include <string>
+#include <iostream>
+
 using namespace std;
 
 int main()
 {
-    int rows, cols;
-    string filename;
-    string filename1;
+    string file1, file2;
 
-    cout << "Enter filename to read matrix from:\n";
-    cin >> filename;
-    cout << "Enter filename to read matrix from:\n";
-    cin >> filename1;
+    cout << "Enter first filename: ";
+    cin >> file1;
+    cout << "Enter second filename: ";
+    cin >> file2;
 
-    Matrix mat1(0, 0), mat2(0, 0);
+    Matrix m1(0, 0), m2(0, 0);
+    m1.input(file1);
+    m2.input(file2);
 
-    mat1.input(filename);
-    mat2.input(filename1);
-    cout << "Matrix 1:\n";
-    mat1.display();
-    cout << "Matrix 2:\n";
-    mat2.display();
+    cout << "\nMatrix 1:\n";
+    m1.display();
 
-    Matrix sum = mat1.add(mat2);
-    cout << "Sum of matrices:\n";
-    sum.display();
+    cout << "\nMatrix 2:\n";
+    m2.display();
 
-    Matrix difference = mat1.sub(mat2);
-    cout << "Difference of matrices:\n";
-    difference.display();
+    cout << "\nSum of matrices:\n";
+    m1.add(m2);
+    m1.display();
 
-    if (mat1.isIdentity())
-    {
-        cout << "The First  matrix is an identity matrix.\n";
-    }
-    else
-    {
-        cout << "The First matrix is NOT an identity matrix.\n";
-    }
-    if (mat2.isIdentity())
-    {
-        cout << "The Second matrix is an identity matrix.\n";
-    }
-    else
-    {
-        cout << "The Second matrix is NOT an identity matrix.\n";
-    }
+    cout << "\nDifference of matrices:\n";
+    m1.sub(m2);
+    m1.display();
+
+    cout << "\nMatrix 1 is " << (m1.isIdentity() ? "" : "NOT ") << "an Identity Matrix.\n";
+    cout << "Matrix 2 is " << (m2.isIdentity() ? "" : "NOT ") << "an Identity Matrix.\n";
+
+    cout << "\nSolving using Gauss Elimination:\n";
+    m1.solve();
+    m1.displaySolution();
 
     return 0;
 }
