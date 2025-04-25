@@ -31,6 +31,9 @@ public:
 
     void gaussJacobi(int maxIterations, double tolerance);
     void gaussSeidel(int maxIterations, double tolerance);
+    double LagrangeInterpolation(double x[], double y[], int n, double xvalue);
+    void leastSquaresLine(double p[], double q[], int m, double &a, double &b);
+    void leastSquaresParabola(double p[], double q[], int m, double &a, double &b, double &c);
 
     bool isDiagonallyDominant();
 };

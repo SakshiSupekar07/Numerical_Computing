@@ -1,11 +1,12 @@
 #include "Matrix.hpp"
 #include <string>
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 int main()
 {
-    string filename, filename1, leftfile, rightfile, filenameLU, filenameIter;
+    string filename, filename1, leftfile, rightfile, filenameLU, filenameIter, filenamelang, filenameLeastSquares;
 
     cout << "Enter filename to read first matrix from: ";
     cin >> filename;
@@ -91,6 +92,74 @@ int main()
 
     cout << "\nRunning Gauss-Seidel...\n";
     iterMat.gaussSeidel(5, 1e-6);
+    cout << "Enter the filename containing the data points: ";
+    cin >> filenamelang;
+
+    ifstream file(filenamelang);
+    if (!file)
+    {
+        cout << "Error opening file!" << endl;
+        return 1;
+    }
+
+    int n = 0;
+    double x[10], y[10];
+
+    while (file >> x[n] >> y[n])
+        n++;
+    file.close();
+
+    double xval;
+    cout << "Enter the x value for interpolation: ";
+    cin >> xval;
+
+    Matrix lang(0, 0);
+    double result = lang.LagrangeInterpolation(x, y, n, xval);
+
+    cout << "Interpolated value at x = " << xval << " is: " << result << endl;
+
+    cout << "Enter filename containing the data points for least squares fitting: ";
+    cin >> filenameLeastSquares;
+
+    ifstream file2(filenameLeastSquares);
+    if (!file2)
+    {
+        cout << "Error opening file!" << endl;
+        return 1;
+    }
+
+    int m = 0;
+    double a, b, c;
+    double p[10], q[10];
+
+    while (file2 >> p[m] >> q[m])
+        m++;
+    file.close();
+
+    cout << "Choose least squares fitting method:\n";
+    cout << "1. Line\n";
+    cout << "2. Parabola\n";
+    int Choice;
+    cin >> Choice;
+
+    Matrix leastsq(0, 0);
+
+    switch (Choice)
+    {
+    case 1:
+
+        leastsq.leastSquaresLine(p, q, m, a, b);
+        cout << "Least Squares Line Fit: y = " << a << " + " << b << "x\n";
+        break;
+    case 2:
+
+        leastsq.leastSquaresParabola(p, q, m, a, b, c);
+        cout << "Least Squares Parabola Fit: y = " << a << " + " << b << "x  " << c << "x²\n";
+
+        break;
+    default:
+        cout << "Invalid choice.\n";
+    }
 
     return 0;
 }

@@ -436,6 +436,93 @@ void Matrix::gaussSeidel(int maxIterations, double tolerance)
     for (int i = 0; i < rows; i++)
         cout << "x" << (i + 1) << " = " << fixed << setprecision(4) << x[i] << endl;
 
-    delete[] x;
+    
 }
+double  Matrix::LagrangeInterpolation(double x[], double y[], int n, double xval) {
+    double ans = 0.0;
+    for (int i = 0; i < n; i++) {
+        double s = y[i];
+        for (int j = 0; j < n; j++) {
+            if (j != i) {
+                s *= (xval - x[j]) / (x[i] - x[j]);
+            }
+        }
+        ans += s;
+    }
+
+    return ans;
+}
+void Matrix::leastSquaresLine(double x[], double y[], int n,double &a,double &b)
+{
+    double sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        sumX += x[i];
+        sumY += y[i];
+        sumXY += x[i] * y[i];
+        sumX2 += x[i] * x[i];
+    }
+
+   
+    Matrix augmented(2, 3);
+    augmented.data[0][0] = n;
+    augmented.data[0][1] = sumX;
+    augmented.data[0][2] = sumY;
+    augmented.data[1][0] = sumX;
+    augmented.data[1][1] = sumX2;
+    augmented.data[1][2] = sumXY;
+
+    augmented.solve();
+    a = augmented.data[0][2]; 
+    b = augmented.data[1][2];
+
+  
+    cout << "Least Squares Line Fit:" << endl;
+    augmented.displaySolution(); 
+}
+
+void Matrix::leastSquaresParabola(double p[], double q[], int m,double &a, double &b, double &c)
+{
+    double sumX = 0, sumX2 = 0, sumX3 = 0, sumX4 = 0;
+    double sumY = 0, sumXY = 0, sumX2Y = 0;
+
+    for (int i = 0; i < m; i++)
+    {
+        sumX += p[i];
+        sumX2 += p[i] * p[i];
+        sumX3 += p[i] * p[i] * p[i];
+        sumX4 += p[i] * p[i] * p[i] * p[i];
+        sumY += q[i];
+        sumXY += p[i] * q[i];
+        sumX2Y += p[i] * p[i] * q[i];
+    }
+
+   
+    Matrix augmented(3, 4);
+    augmented.data[0][0] = m;
+    augmented.data[0][1] = sumX;
+    augmented.data[0][2] = sumX2;
+    augmented.data[0][3] = sumY;
+    augmented.data[1][0] = sumX;
+    augmented.data[1][1] = sumX2;
+    augmented.data[1][2] = sumX3;
+    augmented.data[1][3] = sumXY;
+    augmented.data[2][0] = sumX2;
+    augmented.data[2][1] = sumX3;
+    augmented.data[2][2] = sumX4;
+    augmented.data[2][3] = sumX2Y;
+
+   
+    augmented.solve();
+    a = augmented.data[0][3]; 
+    b = augmented.data[1][3];
+    c = augmented.data[2][3];
+
+
+   
+    cout << "Least Squares Parabola Fit:" << endl;
+    augmented.displaySolution();
+}
+
 
